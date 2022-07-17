@@ -1,6 +1,6 @@
 <template>
     <ContentBase>
-        首页
+        404
     </ContentBase>
 </template>
 
@@ -8,7 +8,7 @@
 import ContentBase from '../components/ContentBase';
 
 export default {
-    name: 'HomeView',
+    name: 'NotFound',
     components: {
         ContentBase,
     }
