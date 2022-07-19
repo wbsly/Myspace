@@ -3,6 +3,7 @@
         <div class="row">
             <div class="col-3">
                 <UserProfileInfo @follow="follow" @unfollow="unfollow" :user="user"/>
+                <UserProfileWrite @post_a_post="post_a_post" />
             </div>
             <div class="col-9">
                 <UserProfilePosts :posts="posts"/>
@@ -16,6 +17,7 @@ import { reactive } from 'vue';
 import ContentBase from '../components/ContentBase';
 import UserProfileInfo from '../components/UserProfileInfo';
 import UserProfilePosts from '../components/UserProfilePosts';
+import UserProfileWrite from '../components/UserProfileWrite';
 
 export default {
     name: 'UserProfileView',
@@ -23,13 +25,14 @@ export default {
         ContentBase,
         UserProfileInfo,
         UserProfilePosts,
+        UserProfileWrite,
     },
 
     setup() {
         const user = reactive({
-            username: "lijiahao",
-            lastName: "Li",
-            firstName: "Jiahao",
+            username: "Behappyday",
+            lastName: "Be",
+            firstName: "Happyday",
             followerCount: 0,
             is_followed: false,
         });
@@ -65,13 +68,23 @@ export default {
             if (!user.is_followed) return;
             user.is_followed = false;
             user.followerCount -- ;
-        }
+        };
+
+        const post_a_post = (content) => {
+            posts.count ++ ;
+            posts.posts.unshift({
+                id: posts.count,
+                userId: 1,
+                content: content,
+            })
+        };
 
         return {
             user: user, // 如果类似这样key和value的值得一样可以简写为user
             follow,
             unfollow,
             posts,
+            post_a_post,
         }
     }
 }
